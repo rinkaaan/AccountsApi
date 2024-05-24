@@ -1,4 +1,4 @@
-package com.rikagu.accounts.controller;
+package com.rikagu.accounts.controllers;
 
 import net.sargue.mailgun.Configuration;
 import net.sargue.mailgun.Mail;

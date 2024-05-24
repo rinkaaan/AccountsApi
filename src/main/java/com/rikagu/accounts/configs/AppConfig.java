@@ -1,4 +1,4 @@
-package com.rikagu.accounts.config;
+package com.rikagu.accounts.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
