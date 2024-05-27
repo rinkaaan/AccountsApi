@@ -12,10 +12,7 @@ import java.io.Serializable;
  */
 @Value
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
-public class LoginUserRequest implements Serializable {
-    @NotBlank(message = "Email or username is required")
-    String usernameOrEmail;
-
-    @NotBlank(message = "Password is required")
-    String password;
+public class ResendVerificationEmailRequest implements Serializable {
+    @NotBlank(message = "Email is required")
+    String email;
 }

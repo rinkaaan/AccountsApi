@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -36,10 +37,15 @@ public class User {
     private boolean verified = false;
     @Column
     private String verificationCode;
+    @Column
+    private Date verificationCodeLastSentAt;
+    @Column
+    private Date createdAt;
 
     @PrePersist
     public void prePersist() {
         verificationCode = generateRandom6numbers();
+        createdAt = new Date();
     }
 
     private String generateRandom6numbers() {
