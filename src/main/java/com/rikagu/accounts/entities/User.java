@@ -44,13 +44,6 @@ public class User {
 
     @PrePersist
     public void prePersist() {
-        verificationCode = generateRandom6numbers();
         createdAt = new Date();
-    }
-
-    private String generateRandom6numbers() {
-        final int min = 100000;
-        final int max = 999999;
-        return String.valueOf((int) (Math.random() * (max - min + 1) + min));
     }
 }

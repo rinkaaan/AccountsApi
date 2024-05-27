@@ -1,7 +1,7 @@
 package com.rikagu.accounts.dtos;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.Value;
@@ -13,14 +13,14 @@ import java.io.Serializable;
  */
 @Value
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
-public class ResendVerificationEmailRequest implements Serializable {
+public class ResetPasswordRequest implements Serializable {
     @NotBlank(message = "Email or username is required")
     String usernameOrEmail;
 
-    public enum ResetType {
-        RESET_PASSWORD, NEW_ACCOUNT
-    }
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
+    String newPassword;
 
-    @NotNull(message = "Reset type is required")
-    ResetType resetType;
+    @NotBlank(message = "Verification code is required")
+    String verificationCode;
 }
