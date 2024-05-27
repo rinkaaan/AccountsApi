@@ -3,8 +3,8 @@ package com.rikagu.accounts.controllers;
 import com.rikagu.accounts.dtos.CreateUserRequest;
 import com.rikagu.accounts.entities.User;
 import com.rikagu.accounts.repositories.UserRepository;
+import com.rikagu.accounts.services.EmailService;
 import jakarta.validation.Valid;
-import net.sargue.mailgun.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +19,11 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserController {
 
     private final UserRepository userRepository;
-    private final Configuration configuration;
+    private final EmailService emailService;
 
-    public UserController(UserRepository userRepository, Configuration configuration) {
+    public UserController(UserRepository userRepository, EmailService emailService) {
         this.userRepository = userRepository;
-        this.configuration = configuration;
+        this.emailService = emailService;
     }
 
     @PostMapping("/register")
@@ -54,13 +54,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An error occurred while saving the user");
         }
 
-//        // Send verification email
-//        Mail.using(configuration)
-//                .to(newUser.getEmail())
-//                .subject("Verify your email")
-//                .text("Your verification code is: " + newUser.getVerificationCode())
-//                .build()
-//                .send();
+        emailService.sendEmail(newUser.getEmail(), "Verify your email", "Your verification code is: " + newUser.getVerificationCode());
     }
 }
 
